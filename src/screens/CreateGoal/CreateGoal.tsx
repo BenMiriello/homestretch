@@ -1,10 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-export default function CreateGoal({goalTitle}: {goalTitle: string}) {
+import useAppState from '../../state';
+
+export default function CreateGoal() {
+  const { goalName } = useAppState();
+
   return (
     <View>
-      <Text>{goalTitle}</Text>
+      <Text>{goalName}</Text>
     </View>
   )
 }
