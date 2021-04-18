@@ -6,7 +6,7 @@ import SuggestedGoalCards from './SuggestedGoalCards';
 export default function Suggestions(){
   return(
     <ScrollView>
-      <View style={styles.body}>
+      <View style={styles.container}>
         <SuggestedGoalCards  />
       </View>
     </ScrollView>
@@ -14,7 +14,7 @@ export default function Suggestions(){
 }
 
 const styles = StyleSheet.create({
-  body: {
+  container: {
     display: "flex",
     justifyContent: 'space-around',
     flexDirection: "row",
