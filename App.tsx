@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 
 export default function App() {
   return (
@@ -8,7 +8,12 @@ export default function App() {
         <Text style={styles.headerText}>My Goals</Text>
       </View>
       <View style={styles.body}>
-        <Text>Open up App.tsx to start working on your app!</Text>
+        <Image style={styles.goalImage} source={require('./images/019-dumbbell.png')}/>
+        <Image style={styles.goalImage} source={require('./images/034-rope.png')}/>
+        <Image style={styles.goalImage} source={require('./images/012-measure.png')}/>
+        <Image style={styles.goalImage} source={require('./images/043-stopwatch.png')}/>
+        <Image style={styles.goalImage} source={require('./images/045-treadmill.png')}/>
+        <Image style={styles.goalImage} source={require('./images/041-sneaker.png')}/>
       </View>
     </View>
   );
@@ -22,7 +27,7 @@ const styles = StyleSheet.create({
   header: {
     height: '10%',
     width: '100%',
-    backgroundColor: '#e80',
+    backgroundColor: '#f86',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-end',
@@ -31,12 +36,27 @@ const styles = StyleSheet.create({
     fontSize: 25,
     padding: '3%',
     color: '#fff',
+    fontWeight: 'bold',
   },
   body: {
     height: '90%',
-    flex: 1,
+    // flex: 1,
+    display: "flex",
+    justifyContent: 'space-around',
+    flexDirection: "row",
+    flexWrap: "wrap",
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+  },
+  bodyRow: {
+    width: '100%',
+    flexWrap: 'nowrap',
+  },
+  goalImage: {
+    width: 150,
+    height: 150,
+    margin: 15
   },
 });
+
+// <Text>Create your first goal here</Text>
