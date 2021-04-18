@@ -7,7 +7,7 @@ export default function Suggestions(){
   return(
     <ScrollView>
       <View style={styles.body}>
-        <SuggestedGoalCards />
+        <SuggestedGoalCards  />
       </View>
     </ScrollView>
   )

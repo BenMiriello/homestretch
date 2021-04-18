@@ -1,33 +1,36 @@
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function SuggestedGoalCard() {
+  const navigation = useNavigation();
+  
   return(
     <>
-      <View style={styles.goalImageContainer}>
+      <TouchableOpacity style={styles.goalImageContainer} onPress={() => navigation.navigate("Create Goal")}>
         <Image style={styles.goalImage} source={require('../../../images/019-dumbbell.png')}/>
-      </View>
-      <View style={styles.goalImageContainer}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.goalImageContainer} onPress={() => navigation.navigate("Create Goal")}>
         <Image style={styles.goalImage} source={require('../../../images/034-rope.png')}/>
-      </View>
-      <View style={styles.goalImageContainer}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.goalImageContainer} onPress={() => navigation.navigate("Create Goal")}>
         <Image style={styles.goalImage} source={require('../../../images/036-scales.png')}/>
-      </View>
-      <View style={styles.goalImageContainer}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.goalImageContainer} onPress={() => navigation.navigate("Create Goal")}>
         <Image style={styles.goalImage} source={require('../../../images/043-stopwatch.png')}/>
-      </View>
-      <View style={styles.goalImageContainer}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.goalImageContainer} onPress={() => navigation.navigate("Create Goal")}>
         <Image style={styles.goalImage} source={require('../../../images/045-treadmill.png')}/>
-      </View>
-      <View style={styles.goalImageContainer}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.goalImageContainer} onPress={() => navigation.navigate("Create Goal")}>
         <Image style={styles.goalImage} source={require('../../../images/041-sneaker.png')}/>
-      </View>
-      <View style={styles.goalImageContainer}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.goalImageContainer} onPress={() => navigation.navigate("Create Goal")}>
         <Image style={styles.goalImage} source={require('../../../images/032-note.png')}/>
-      </View>
-      <View style={styles.goalImageContainer}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.goalImageContainer} onPress={() => navigation.navigate("Create Goal")}>
         <Image style={styles.goalImage} source={require('../../../images/023-healthy.png')}/>
-      </View>
+      </TouchableOpacity>
     </>
   )
 };

@@ -1,9 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { MainStackNavigator } from './src/navigation/StackNavigator';
-
-import SuggestedGoalCards from './src/screens/Suggestions/SuggestedGoalCards';
 
 export default function App() {
   return (
@@ -12,6 +9,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-});
