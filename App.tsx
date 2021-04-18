@@ -8,12 +8,24 @@ export default function App() {
         <Text style={styles.headerText}>My Goals</Text>
       </View>
       <View style={styles.body}>
-        <Image style={styles.goalImage} source={require('./images/019-dumbbell.png')}/>
-        <Image style={styles.goalImage} source={require('./images/034-rope.png')}/>
-        <Image style={styles.goalImage} source={require('./images/012-measure.png')}/>
-        <Image style={styles.goalImage} source={require('./images/043-stopwatch.png')}/>
-        <Image style={styles.goalImage} source={require('./images/045-treadmill.png')}/>
-        <Image style={styles.goalImage} source={require('./images/041-sneaker.png')}/>
+        <View style={styles.goalImageContainer}>
+          <Image style={styles.goalImage} source={require('./images/019-dumbbell.png')}/>
+        </View>
+        <View style={styles.goalImageContainer}>
+          <Image style={styles.goalImage} source={require('./images/034-rope.png')}/>
+        </View>
+        <View style={styles.goalImageContainer}>
+          <Image style={styles.goalImage} source={require('./images/012-measure.png')}/>
+        </View>
+        <View style={styles.goalImageContainer}>
+          <Image style={styles.goalImage} source={require('./images/043-stopwatch.png')}/>
+        </View>
+        <View style={styles.goalImageContainer}>
+          <Image style={styles.goalImage} source={require('./images/045-treadmill.png')}/>
+        </View>
+        <View style={styles.goalImageContainer}>
+          <Image style={styles.goalImage} source={require('./images/041-sneaker.png')}/>
+        </View>
       </View>
     </View>
   );
@@ -46,17 +58,26 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     backgroundColor: '#fff',
+    padding: 10,
+    paddingTop: 15,
+    paddingBottom: 15,
     // alignItems: 'center',
   },
-  bodyRow: {
-    width: '100%',
-    flexWrap: 'nowrap',
+  goalImageContainer: {
+    width: 160,
+    height: 160,
+    margin: 10,
+    marginTop: 15,
+    marginBottom: 15,
+    borderWidth: 3,
+    borderRadius: 5,
+    borderColor: '#eee',
+    padding:15,
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   goalImage: {
-    width: 150,
-    height: 150,
-    margin: 15
+    width: 125,
+    height: 125,
   },
 });
-
-// <Text>Create your first goal here</Text>
