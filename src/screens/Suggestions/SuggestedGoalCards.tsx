@@ -5,28 +5,28 @@ export default function SuggestedGoalCard() {
   return(
     <>
       <View style={styles.goalImageContainer}>
-        <Image style={styles.goalImage} source={require('./images/019-dumbbell.png')}/>
+        <Image style={styles.goalImage} source={require('../../../images/019-dumbbell.png')}/>
       </View>
       <View style={styles.goalImageContainer}>
-        <Image style={styles.goalImage} source={require('./images/034-rope.png')}/>
+        <Image style={styles.goalImage} source={require('../../../images/034-rope.png')}/>
       </View>
       <View style={styles.goalImageContainer}>
-        <Image style={styles.goalImage} source={require('./images/036-scales.png')}/>
+        <Image style={styles.goalImage} source={require('../../../images/036-scales.png')}/>
       </View>
       <View style={styles.goalImageContainer}>
-        <Image style={styles.goalImage} source={require('./images/043-stopwatch.png')}/>
+        <Image style={styles.goalImage} source={require('../../../images/043-stopwatch.png')}/>
       </View>
       <View style={styles.goalImageContainer}>
-        <Image style={styles.goalImage} source={require('./images/045-treadmill.png')}/>
+        <Image style={styles.goalImage} source={require('../../../images/045-treadmill.png')}/>
       </View>
       <View style={styles.goalImageContainer}>
-        <Image style={styles.goalImage} source={require('./images/041-sneaker.png')}/>
+        <Image style={styles.goalImage} source={require('../../../images/041-sneaker.png')}/>
       </View>
       <View style={styles.goalImageContainer}>
-        <Image style={styles.goalImage} source={require('./images/032-note.png')}/>
+        <Image style={styles.goalImage} source={require('../../../images/032-note.png')}/>
       </View>
       <View style={styles.goalImageContainer}>
-        <Image style={styles.goalImage} source={require('./images/023-healthy.png')}/>
+        <Image style={styles.goalImage} source={require('../../../images/023-healthy.png')}/>
       </View>
     </>
   )
