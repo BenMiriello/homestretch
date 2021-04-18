@@ -1,0 +1,12 @@
+{
+  "name": "homestretch",
+  "displayName": "homestretch",
+  "expo": {
+    "name": "homestretch",
+    "slug": "homestretch",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
