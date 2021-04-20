@@ -9,8 +9,8 @@ export interface StateContextType {
   setTimesPerWeek: React.Dispatch<TimesPerWeek>;
   anyDay: AnyDay;
   setAnyDay: React.Dispatch<AnyDay>;
-  weekdays: string[];
-  setWeekdays: React.Dispatch<string[]>;
+  weekdays: string;
+  setWeekdays: React.Dispatch<string>;
   shared: boolean;
   setShared: React.Dispatch<boolean>;
 };
@@ -21,7 +21,7 @@ export const AppStateProvider = (props: React.PropsWithChildren<{}>) => {
   const [goalName, setGoalName] = useState('');
   const [timesPerWeek, setTimesPerWeek] = useState<TimesPerWeek>(1);
   const [anyDay, setAnyDay] = useState<AnyDay>(true);
-  const [weekdays, setWeekdays] = useState<string[]>([]);
+  const [weekdays, setWeekdays] = useState<string>('0000000');
   const [shared, setShared] = useState<boolean>(false);
 
   const contextValue = {
