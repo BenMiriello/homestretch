@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { StyleSheet, TouchableHighlight, Text, TextInput, View, SafeAreaView } from 'react-native'
+import { StyleSheet, TouchableHighlight, Text, TextInput, View, SafeAreaView, Alert } from 'react-native'
 
-import useAppState from '../../state';
+import useAppState, { GoalType } from '../../state';
 import DismissKeyboard from '../../DismissKeyboard';
 
 export default function CreateGoal() {
-  const { goalName, setGoalName } = useAppState();
+  const { goalName, setGoalName, saveGoalToDB } = useAppState();
   const [timesPerWeek, setTimesPerWeek] = useState<number>(1);
   const [anyDay, setAnyDay] = useState<boolean>(true);
   const [weekdays, setWeekdays] = useState<string>('0000000');
@@ -21,6 +21,9 @@ export default function CreateGoal() {
     setWeekdays(tmpWeekdays.join(''));
   };
 
+  const onSubmit = () => {
+  }
+
   return (
     <SafeAreaView>
       <DismissKeyboard>
@@ -34,14 +37,14 @@ export default function CreateGoal() {
 
             <View style={styles.formRow}>
               <TouchableHighlight style={{width: '47.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={anyDayPress}>
-                <View style={anyDay ? styles.buttonNotSelected : styles.buttonSelected}>
-                  <Text style={anyDay ? styles.buttonTextNotSelected : styles.buttonTextSelected}>Times Per Week</Text>
+                <View style={anyDay ? styles.buttonSelected : styles.buttonNotSelected}>
+                  <Text style={anyDay ? styles.buttonTextSelected : styles.buttonTextNotSelected}>Times Per Week</Text>
                 </View>
               </TouchableHighlight>
               <View style={{width: '5%'}}></View>
               <TouchableHighlight style={{width: '47.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={anyDayPress}>
-                <View style={anyDay ? styles.buttonSelected : styles.buttonNotSelected}>
-                  <Text style={anyDay ? styles.buttonTextSelected : styles.buttonTextNotSelected}>Selected Days</Text>
+                <View style={anyDay ? styles.buttonNotSelected : styles.buttonSelected}>
+                  <Text style={anyDay ? styles.buttonTextNotSelected : styles.buttonTextSelected}>Selected Days</Text>
                 </View>
               </TouchableHighlight>
             </View>
@@ -49,20 +52,20 @@ export default function CreateGoal() {
 
             {anyDay ?
               <View style={styles.formRow}>
-                {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, idx) =>
-                  <TouchableHighlight key={`dow-${day}`}  style={{width: '12.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={_ => weekDaysPress(idx)}>
-                    <View style={weekdays[idx] === '1' ? styles.buttonSelected : styles.buttonNotSelected}>
-                      <Text style={weekdays[idx] === '1' ? styles.buttonTextSelected : styles.buttonTextNotSelected}>{day[0].toUpperCase()}</Text>
+                {['1','2','3','4','5','6','7'].map(x =>
+                  <TouchableHighlight key={`tpw-${x}`} style={{width: '12.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={_ => timesPerWeekPress(parseInt(x))}>
+                    <View style={x === timesPerWeek.toString() ? styles.buttonSelected : styles.buttonNotSelected}>
+                      <Text style={x === timesPerWeek.toString() ? styles.buttonTextSelected : styles.buttonTextNotSelected}>{x}</Text>
                     </View>
                   </TouchableHighlight>
                 )}
               </View>
             :
               <View style={styles.formRow}>
-                {['1','2','3','4','5','6','7'].map(x =>
-                  <TouchableHighlight key={`tpw-${x}`} style={{width: '12.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={_ => timesPerWeekPress(parseInt(x))}>
-                    <View style={x === timesPerWeek.toString() ? styles.buttonSelected : styles.buttonNotSelected}>
-                      <Text style={x === timesPerWeek.toString() ? styles.buttonTextSelected : styles.buttonTextNotSelected}>{x}</Text>
+                {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, idx) =>
+                  <TouchableHighlight key={`dow-${day}`}  style={{width: '12.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={_ => weekDaysPress(idx)}>
+                    <View style={weekdays[idx] === '1' ? styles.buttonSelected : styles.buttonNotSelected}>
+                      <Text style={weekdays[idx] === '1' ? styles.buttonTextSelected : styles.buttonTextNotSelected}>{day[0].toUpperCase()}</Text>
                     </View>
                   </TouchableHighlight>
                 )}
@@ -88,7 +91,7 @@ export default function CreateGoal() {
 
 
             <View style={styles.formRow}>
-              <TouchableHighlight style={{width: '100%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={() => {}}>
+              <TouchableHighlight style={{width: '100%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={onSubmit}>
                 <View style={styles.buttonSelected}>
                   <Text style={styles.buttonTextSelected}>Set Goal</Text>
                 </View>
