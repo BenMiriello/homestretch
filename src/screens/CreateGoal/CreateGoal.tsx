@@ -3,21 +3,21 @@ import { StyleSheet, TouchableHighlight, Text, TextInput, View, SafeAreaView } f
 
 import useAppState from '../../state';
 import DismissKeyboard from '../../DismissKeyboard';
-import { TimesPerWeek } from '../../../types';
 
 export default function CreateGoal() {
   const { goalName, setGoalName } = useAppState();
-  const [timesPerWeek, setTimesPerWeek] = useState<TimesPerWeek>(1);
+  const [timesPerWeek, setTimesPerWeek] = useState<number>(1);
   const [anyDay, setAnyDay] = useState<boolean>(true);
   const [weekdays, setWeekdays] = useState<string>('0000000');
   const [shared, setShared] = useState<boolean>(false);
 
   const anyDayPress = () => setAnyDay(!anyDay);
-  const timesPerWeekPress = (x: TimesPerWeek) => setTimesPerWeek(x);
+  const timesPerWeekPress = (x: number) => setTimesPerWeek(x);
   const sharedPress = () => setShared(!shared);
   const weekDaysPress = (idx: number) => {
     const tmpWeekdays = weekdays.split('');
     tmpWeekdays[idx] = tmpWeekdays[idx] === '0' ? '1' : '0';
+    setTimesPerWeek(tmpWeekdays.filter(d => d === '1').length);
     setWeekdays(tmpWeekdays.join(''));
   };
 
@@ -60,7 +60,7 @@ export default function CreateGoal() {
             :
               <View style={styles.formRow}>
                 {['1','2','3','4','5','6','7'].map(x =>
-                  <TouchableHighlight key={`tpw-${x}`} style={{width: '12.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={_ => timesPerWeekPress(x)}>
+                  <TouchableHighlight key={`tpw-${x}`} style={{width: '12.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={_ => timesPerWeekPress(parseInt(x))}>
                     <View style={x === timesPerWeek.toString() ? styles.buttonSelected : styles.buttonNotSelected}>
                       <Text style={x === timesPerWeek.toString() ? styles.buttonTextSelected : styles.buttonTextNotSelected}>{x}</Text>
                     </View>
