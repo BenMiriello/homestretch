@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, TouchableHighlight, Text, TextInput, View, SafeAreaView } from 'react-native'
 
 import useAppState from '../../state';
@@ -6,7 +6,11 @@ import DismissKeyboard from '../../DismissKeyboard';
 import { TimesPerWeek } from '../../../types';
 
 export default function CreateGoal() {
-  const { goalName, setGoalName, timesPerWeek, setTimesPerWeek, anyDay, setAnyDay, weekdays, setWeekdays,  shared, setShared } = useAppState();
+  const { goalName, setGoalName } = useAppState();
+  const [timesPerWeek, setTimesPerWeek] = useState<TimesPerWeek>(1);
+  const [anyDay, setAnyDay] = useState<boolean>(true);
+  const [weekdays, setWeekdays] = useState<string>('0000000');
+  const [shared, setShared] = useState<boolean>(false);
 
   const anyDayPress = () => setAnyDay(!anyDay);
   const timesPerWeekPress = (x: TimesPerWeek) => setTimesPerWeek(x);
