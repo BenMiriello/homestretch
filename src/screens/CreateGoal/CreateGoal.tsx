@@ -33,17 +33,6 @@ export default function CreateGoal() {
 
 
             <View style={styles.formRow}>
-              {['1','2','3','4','5','6','7'].map(x =>
-                <TouchableHighlight key={`tpw-${x}`} style={{width: '12.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={_ => timesPerWeekPress(x)}>
-                  <View style={x === timesPerWeek.toString() ? styles.buttonSelected : styles.buttonNotSelected}>
-                    <Text style={x === timesPerWeek.toString() ? styles.buttonTextSelected : styles.buttonTextNotSelected}>{x}</Text>
-                  </View>
-                </TouchableHighlight>
-              )}
-            </View>
-            <View style={{height: 20}}></View>
-
-            <View style={styles.formRow}>
               <TouchableHighlight style={{width: '47.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={anyDayPress}>
                 <View style={anyDay ? styles.buttonNotSelected : styles.buttonSelected}>
                   <Text style={anyDay ? styles.buttonTextNotSelected : styles.buttonTextSelected}>Times Per Week</Text>
@@ -58,15 +47,27 @@ export default function CreateGoal() {
             </View>
             <View style={{height: 20}}></View>
 
-            <View style={styles.formRow}>
-              {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map((day, idx) =>
-                <TouchableHighlight key={`dow-${day}`}  style={{width: '12.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={_ => weekDaysPress(idx)}>
-                  <View style={weekdays[idx] === '1' ? styles.buttonSelected : styles.buttonNotSelected}>
-                    <Text style={weekdays[idx] === '1' ? styles.buttonTextSelected : styles.buttonTextNotSelected}>{day[0].toUpperCase()}</Text>
-                  </View>
-                </TouchableHighlight>
-              )}
-            </View>
+            {anyDay ?
+              <View style={styles.formRow}>
+                {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, idx) =>
+                  <TouchableHighlight key={`dow-${day}`}  style={{width: '12.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={_ => weekDaysPress(idx)}>
+                    <View style={weekdays[idx] === '1' ? styles.buttonSelected : styles.buttonNotSelected}>
+                      <Text style={weekdays[idx] === '1' ? styles.buttonTextSelected : styles.buttonTextNotSelected}>{day[0].toUpperCase()}</Text>
+                    </View>
+                  </TouchableHighlight>
+                )}
+              </View>
+            :
+              <View style={styles.formRow}>
+                {['1','2','3','4','5','6','7'].map(x =>
+                  <TouchableHighlight key={`tpw-${x}`} style={{width: '12.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={_ => timesPerWeekPress(x)}>
+                    <View style={x === timesPerWeek.toString() ? styles.buttonSelected : styles.buttonNotSelected}>
+                      <Text style={x === timesPerWeek.toString() ? styles.buttonTextSelected : styles.buttonTextNotSelected}>{x}</Text>
+                    </View>
+                  </TouchableHighlight>
+                )}
+              </View>
+            }
             <View style={styles.formRowSeparator}></View>
 
 
