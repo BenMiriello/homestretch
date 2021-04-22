@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { StyleSheet, TouchableHighlight, Text, TextInput, View, SafeAreaView, Alert } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 
 import useAppState, { GoalType } from '../../state';
 import DismissKeyboard from '../../DismissKeyboard';
 
 export default function CreateGoal() {
-  const { goalName, setGoalName, saveGoalToDB } = useAppState();
+  const navigation = useNavigation();
+  const { goalName, setGoalName, saveGoalToDb, setCurrentGoal } = useAppState();
+
   const [timesPerWeek, setTimesPerWeek] = useState<number>(1);
   const [anyDay, setAnyDay] = useState<boolean>(true);
   const [weekdays, setWeekdays] = useState<string>('0000000');
@@ -22,6 +25,24 @@ export default function CreateGoal() {
   };
 
   const onSubmit = () => {
+    if (anyDay ? timesPerWeek > 0 : weekdays !== '0000000') {
+      const goalToSave: GoalType = {
+        name: goalName,
+        timesPerWeek: anyDay ? timesPerWeek : 0,
+        weekdays: anyDay ? '' : weekdays,
+        shared,
+      };
+      saveGoalToDb(goalToSave).then((newGoal) => {
+        setCurrentGoal(newGoal);
+        navigation.navigate('Goal Details');
+      });
+    } else {
+      Alert.alert(
+        "Goal Incomplete",
+        "Aim for at least once per week",
+        [{ text: "OK" }],
+      )
+    }
   }
 
   return (

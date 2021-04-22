@@ -10,25 +10,27 @@ export interface GoalType {
 export interface StateContextType {
   goalName: string;
   setGoalName: React.Dispatch<string>;
-  saveGoalToDb: (g: GoalType) => GoalType;
+  currentGoal: GoalType;
+  setCurrentGoal: React.Dispatch<GoalType | null>;
+  saveGoalToDb: (g: GoalType) => Promise<GoalType>;
 };
 
 export const StateContext = createContext<StateContextType>(null!);
 
 export const AppStateProvider = (props: React.PropsWithChildren<{}>) => {
   const [goalName, setGoalName] = useState('');
+  const [currentGoal, setCurrentGoal] = useState<GoalType | null>();
+
   const saveGoalToDb = (newGoal: GoalType) => {
-    // fetch()
-    // .then(r => r.json())
-    // .then(res => )
-    // return res.goal;
     setGoalName('');
-    return newGoal;
+    return new Promise((resolve) => setTimeout(() => resolve(newGoal), 500));
   };
 
   const contextValue = {
     goalName,
     setGoalName,
+    currentGoal,
+    setCurrentGoal,
     saveGoalToDb,
   } as StateContextType;
 
