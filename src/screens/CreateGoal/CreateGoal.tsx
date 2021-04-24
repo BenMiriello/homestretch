@@ -32,9 +32,10 @@ export default function CreateGoal() {
     if (anyDay ? timesPerWeek > 0 : weekdays !== '0000000') {
       const goalToSave: GoalType = {
         name: goalName,
-        timesPerWeek: anyDay ? timesPerWeek : 0,
-        weekdays: anyDay ? '' : weekdays,
+        timesPerWeek,
+        weekdays,
         shared,
+        anyDay,
       };
       saveGoalToDb(goalToSave).then((newGoal) => {
         setCurrentGoal(newGoal);
