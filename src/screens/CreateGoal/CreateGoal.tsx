@@ -29,7 +29,19 @@ export default function CreateGoal() {
   // const ongoingPress = () => setOngoing(!ongoing);
 
   const onSubmit = () => {
-    if (anyDay ? timesPerWeek > 0 : weekdays !== '0000000') {
+    if (anyDay ? timesPerWeek ===  0 : weekdays === '0000000') {
+      Alert.alert(
+        "Goal Incomplete",
+        "Aim for at least once per week",
+        [{ text: "OK" }],
+      )
+    } else if (goalName.length === 0) {
+      Alert.alert(
+        "Goal Incomplete",
+        "Your goal Needs a name",
+        [{ text: "OK" }],
+      )
+    } else {
       const goalToSave: GoalType = {
         name: goalName,
         timesPerWeek,
@@ -41,14 +53,8 @@ export default function CreateGoal() {
         setCurrentGoal(newGoal);
         navigation.navigate('Goal Details');
       });
-    } else {
-      Alert.alert(
-        "Goal Incomplete",
-        "Aim for at least once per week",
-        [{ text: "OK" }],
-      )
     }
-  }
+  };
 
   return (
     <SafeAreaView>
