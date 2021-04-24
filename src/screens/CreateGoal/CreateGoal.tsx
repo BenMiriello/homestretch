@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, TouchableHighlight, Text, TextInput, View, SafeAreaView, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
+// import RNPickerSelect from 'react-native-picker-select';
 
 import useAppState, { GoalType } from '../../state';
 import DismissKeyboard from '../../DismissKeyboard';
@@ -13,6 +14,8 @@ export default function CreateGoal() {
   const [anyDay, setAnyDay] = useState<boolean>(true);
   const [weekdays, setWeekdays] = useState<string>('0000000');
   const [shared, setShared] = useState<boolean>(false);
+  // const [endDate, setEndDate] = useState<Date | null>(null);
+  // const [ongoing, setOngoing] = useState<boolean>(true);
 
   const anyDayPress = () => setAnyDay(!anyDay);
   const timesPerWeekPress = (x: number) => setTimesPerWeek(x);
@@ -23,6 +26,7 @@ export default function CreateGoal() {
     setTimesPerWeek(tmpWeekdays.filter(d => d === '1').length);
     setWeekdays(tmpWeekdays.join(''));
   };
+  // const ongoingPress = () => setOngoing(!ongoing);
 
   const onSubmit = () => {
     if (anyDay ? timesPerWeek > 0 : weekdays !== '0000000') {
@@ -57,19 +61,19 @@ export default function CreateGoal() {
 
 
             <View style={styles.formRow}>
-              <TouchableHighlight style={{width: '47.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={anyDayPress}>
+              <TouchableHighlight style={{width: '48.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={anyDayPress}>
                 <View style={anyDay ? styles.buttonSelected : styles.buttonNotSelected}>
                   <Text style={anyDay ? styles.buttonTextSelected : styles.buttonTextNotSelected}>Times Per Week</Text>
                 </View>
               </TouchableHighlight>
-              <View style={{width: '5%'}}></View>
-              <TouchableHighlight style={{width: '47.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={anyDayPress}>
+              <View style={{width: '3%'}}></View>
+              <TouchableHighlight style={{width: '48.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={anyDayPress}>
                 <View style={anyDay ? styles.buttonNotSelected : styles.buttonSelected}>
                   <Text style={anyDay ? styles.buttonTextNotSelected : styles.buttonTextSelected}>Selected Days</Text>
                 </View>
               </TouchableHighlight>
             </View>
-            <View style={{height: 20}}></View>
+            <View style={{height: 15}}></View>
 
             {anyDay ?
               <View style={styles.formRow}>
@@ -95,14 +99,48 @@ export default function CreateGoal() {
             <View style={styles.formRowSeparator}></View>
 
 
+            {/* <View style={styles.formRow}>
+              <TouchableHighlight style={{width: ongoing ? '100%' : '31%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={ongoingPress}>
+                <View style={styles.buttonNotSelected}>
+                  <Text style={styles.buttonTextNotSelected}>
+                    {ongoing ? 'Set End Date' : 'Cancel'}
+                  </Text>
+                </View>
+              </TouchableHighlight>
+              {ongoing ? null :
+                <>
+                  <View style={styles.select}>
+                    <RNPickerSelect
+                      onValueChange={(value) => console.log(value)}
+                      items={[
+                        { label: '1', value: 1 },
+                        { label: '2', value: 2 },
+                      ]}
+                    />
+                  </View>
+                  <View style={styles.select}>
+                    <RNPickerSelect
+                      onValueChange={(value) => console.log(value)}
+                      items={[
+                        { label: 'Weeks', value: 'weeks' },
+                        { label: 'Months', value: 'months' },
+                      ]}
+                    />
+                  </View>
+                </>
+              }
+              </View>
+            <View style={styles.formRowSeparator}></View> */}
+
+
             <View style={styles.formRow}>
-              <TouchableHighlight style={{width: '47.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={sharedPress}>
+              <TouchableHighlight style={{width: '48.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={sharedPress}>
                 <View style={shared ? styles.buttonNotSelected : styles.buttonSelected}>
                   <Text style={shared ? styles.buttonTextNotSelected : styles.buttonTextSelected}>Private</Text>
                 </View>
               </TouchableHighlight>
-              <View style={{width: '5%'}}></View>
-              <TouchableHighlight style={{width: '47.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={sharedPress}>
+              <View style={{width: '3%'}}></View>
+              <TouchableHighlight style={{width: '48.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={sharedPress}>
                 <View style={shared ? styles.buttonSelected : styles.buttonNotSelected}>
                   <Text style={shared ? styles.buttonTextSelected : styles.buttonTextNotSelected}>Public</Text>
                 </View>
@@ -146,7 +184,7 @@ const styles = StyleSheet.create({
   },
   formRowSeparator: {
     width: '100%',
-    height: 50,
+    height: 40,
   },
   aboveButtonLabel: {
     fontSize: 20,
@@ -197,4 +235,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '500',
   },
+  select: {
+    width: '31%',
+    height: 50,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: '#e75b4c',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10
+  }
 });
