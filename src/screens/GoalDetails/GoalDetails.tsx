@@ -10,7 +10,7 @@ export default function GoalDetails() {
   const displayWeekdays = (
     currentGoal.weekdays.split('').map((n, i) => (
       n === '1' ? weekDayNames[i] : null
-    )).filter(e => e).join(' ')
+    )).filter(e => e).join(', ')
   );
 
   return (
@@ -19,7 +19,9 @@ export default function GoalDetails() {
         <View>
           <Text style={styles.textRow}>{currentGoal.name}</Text>
           {currentGoal.anyDay ?
-            <Text style={styles.textRow}>{currentGoal.timesPerWeek.toString()}</Text> 
+            <Text style={styles.textRow}>
+              {currentGoal.timesPerWeek.toString()} day{currentGoal.timesPerWeek === 1 ? '' : 's'}/week
+            </Text> 
           : null}
           {currentGoal.anyDay ? null :
             <Text style={styles.textRow}>{displayWeekdays}</Text>
