@@ -1,12 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 
-export interface GoalType {
-  name: string;
-  timesPerWeek: number;
-  weekdays: string;
-  shared: boolean;
-  anyDay: boolean;
-};
+import { GoalType } from '../utils/types';
 
 export interface StateContextType {
   goalName: string;

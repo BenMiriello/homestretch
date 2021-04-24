@@ -3,8 +3,9 @@ import { StyleSheet, TouchableHighlight, Text, TextInput, View, SafeAreaView, Al
 import { useNavigation } from '@react-navigation/native';
 // import RNPickerSelect from 'react-native-picker-select';
 
-import useAppState, { GoalType } from '../../state';
-import DismissKeyboard from '../../DismissKeyboard';
+import useAppState from '../../state';
+import DismissKeyboard from '../../components/DismissKeyboard';
+import { GoalType } from '../../utils/types';
 
 export default function CreateGoal() {
   const navigation = useNavigation();

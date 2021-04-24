@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 
 import useAppState from '../../state';
-import { weekDayNames } from '../../../constants';
+import { weekDayNames } from '../../utils/constants';
 
 export default function GoalDetails() {
   const { currentGoal } = useAppState();
