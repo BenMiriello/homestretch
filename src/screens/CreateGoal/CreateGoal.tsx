@@ -9,7 +9,7 @@ import { GoalType } from '../../utils/types';
 
 export default function CreateGoal() {
   const navigation = useNavigation();
-  const { goalName, setGoalName, saveGoalToDb, setCurrentGoal } = useAppState();
+  const { goalName, setGoalName, saveGoal, setCurrentGoal } = useAppState();
 
   const [timesPerWeek, setTimesPerWeek] = useState<number>(1);
   const [anyDay, setAnyDay] = useState<boolean>(true);
@@ -50,7 +50,7 @@ export default function CreateGoal() {
         shared,
         anyDay,
       };
-      saveGoalToDb(goalToSave).then((newGoal) => {
+      saveGoal(goalToSave).then((newGoal) => {
         setCurrentGoal(newGoal);
         navigation.navigate('Goal Details');
       });

@@ -1,22 +1,24 @@
 import React, { createContext, useContext, useState } from 'react';
 
 import { GoalType } from '../utils/types';
+import useAsyncStorage from '../hooks/useAsyncStorage';
 
 export interface StateContextType {
   goalName: string;
   setGoalName: React.Dispatch<string>;
   currentGoal: GoalType;
   setCurrentGoal: React.Dispatch<GoalType | null>;
-  saveGoalToDb: (g: GoalType) => Promise<GoalType>;
+  saveGoal: (g: GoalType) => Promise<GoalType>;
 };
 
 export const StateContext = createContext<StateContextType>(null!);
 
 export const AppStateProvider = (props: React.PropsWithChildren<{}>) => {
+  const [storageValue, setStorageValue, synced] = useAsyncStorage();
   const [goalName, setGoalName] = useState('');
   const [currentGoal, setCurrentGoal] = useState<GoalType | null>();
 
-  const saveGoalToDb = (newGoal: GoalType) => {
+  const saveGoal = (newGoal: GoalType) => {
     setGoalName('');
     return new Promise((resolve) => setTimeout(() => resolve(newGoal), 500));
   };
@@ -26,7 +28,7 @@ export const AppStateProvider = (props: React.PropsWithChildren<{}>) => {
     setGoalName,
     currentGoal,
     setCurrentGoal,
-    saveGoalToDb,
+    saveGoal,
   } as StateContextType;
 
   return <StateContext.Provider value={contextValue}>{props.children}</StateContext.Provider>;
