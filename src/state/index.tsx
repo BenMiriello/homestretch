@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 
 import { GoalType } from '../utils/types';
-import useAsyncStorage from '../hooks/useAsyncStorage';
 
 export interface StateContextType {
   goalName: string;
@@ -14,7 +13,6 @@ export interface StateContextType {
 export const StateContext = createContext<StateContextType>(null!);
 
 export const AppStateProvider = (props: React.PropsWithChildren<{}>) => {
-  const [storageValue, setStorageValue, synced] = useAsyncStorage();
   const [goalName, setGoalName] = useState('');
   const [currentGoal, setCurrentGoal] = useState<GoalType | null>();
 
