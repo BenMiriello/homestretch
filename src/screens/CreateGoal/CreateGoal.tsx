@@ -11,16 +11,20 @@ export default function CreateGoal() {
   const navigation = useNavigation();
   const { goalName, setGoalName, saveGoal, setCurrentGoal } = useAppState();
 
-  const [timesPerWeek, setTimesPerWeek] = useState<number>(1);
+  const [timesPerWeek, setTimesPerWeek] = useState<number>(7);
   const [anyDay, setAnyDay] = useState<boolean>(true);
-  const [weekdays, setWeekdays] = useState<string>('0000000');
+  const [weekdays, setWeekdays] = useState<string>('1111111');
   const [shared, setShared] = useState<boolean>(false);
   // const [endDate, setEndDate] = useState<Date | null>(null);
   // const [ongoing, setOngoing] = useState<boolean>(true);
 
-  const anyDayPress = () => setAnyDay(!anyDay);
+  const anyDayPress = (b: boolean) => setAnyDay(b);
   const timesPerWeekPress = (x: number) => setTimesPerWeek(x);
   const sharedPress = () => setShared(!shared);
+  const everyDayPress = () => {
+    setTimesPerWeek(7);
+    setWeekdays('1111111');
+  };
   const weekDaysPress = (idx: number) => {
     const tmpWeekdays = weekdays.split('');
     tmpWeekdays[idx] = tmpWeekdays[idx] === '0' ? '1' : '0';
@@ -69,15 +73,21 @@ export default function CreateGoal() {
 
 
             <View style={styles.formRow}>
-              <TouchableHighlight style={{width: '48.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={anyDayPress}>
-                <View style={anyDay ? styles.buttonSelected : styles.buttonNotSelected}>
-                  <Text style={anyDay ? styles.buttonTextSelected : styles.buttonTextNotSelected}>Times Per Week</Text>
+              <TouchableHighlight style={{width: '31.3333%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={everyDayPress}>
+                <View style={timesPerWeek === 7 ? styles.buttonSelected : styles.buttonNotSelected}>
+                  <Text style={timesPerWeek === 7 ? styles.buttonTextSelected : styles.buttonTextNotSelected }>Every Day</Text>
                 </View>
               </TouchableHighlight>
-              <View style={{width: '3%'}}></View>
-              <TouchableHighlight style={{width: '48.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={anyDayPress}>
-                <View style={anyDay ? styles.buttonNotSelected : styles.buttonSelected}>
-                  <Text style={anyDay ? styles.buttonTextNotSelected : styles.buttonTextSelected}>Selected Days</Text>
+              <View style={{width: '2%'}}></View>
+              <TouchableHighlight style={{width: '31.3333%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={() => anyDayPress(true)}>
+                <View style={anyDay && timesPerWeek !== 7 ? styles.buttonSelected : styles.buttonNotSelected}>
+                  <Text style={anyDay && timesPerWeek !== 7 ? styles.buttonTextSelected : styles.buttonTextNotSelected}>Times / Wk</Text>
+                </View>
+              </TouchableHighlight>
+              <View style={{width: '2%'}}></View>
+              <TouchableHighlight style={{width: '31.3333%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={() => anyDayPress(false)}>
+                <View style={!anyDay && timesPerWeek !== 7 ? styles.buttonSelected : styles.buttonNotSelected}>
+                  <Text style={!anyDay && timesPerWeek !== 7 ? styles.buttonTextSelected : styles.buttonTextNotSelected}>Select Days</Text>
                 </View>
               </TouchableHighlight>
             </View>
