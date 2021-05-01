@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, TouchableHighlight, Text, TextInput, View, SafeAreaView, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 // import RNPickerSelect from 'react-native-picker-select';
@@ -12,18 +12,16 @@ export default function CreateGoal() {
   const { goalName, setGoalName, saveGoal, setCurrentGoal } = useAppState();
 
   const [timesPerWeek, setTimesPerWeek] = useState<number>(7);
-  const [anyDay, setAnyDay] = useState<boolean>(true);
+  const [everyDay, setEveryDay] = useState<boolean>(true);
   const [weekdays, setWeekdays] = useState<string>('1111111');
   const [shared, setShared] = useState<boolean>(false);
   // const [endDate, setEndDate] = useState<Date | null>(null);
   // const [ongoing, setOngoing] = useState<boolean>(true);
 
-  const anyDayPress = (b: boolean) => setAnyDay(b);
-  const timesPerWeekPress = (x: number) => setTimesPerWeek(x);
   const sharedPress = () => setShared(!shared);
-  const everyDayPress = () => {
-    setTimesPerWeek(7);
-    setWeekdays('1111111');
+  const everyDayPress = (b: boolean) => {
+    setEveryDay(b);
+    setWeekdays('1111110');
   };
   const weekDaysPress = (idx: number) => {
     const tmpWeekdays = weekdays.split('');
@@ -33,8 +31,12 @@ export default function CreateGoal() {
   };
   // const ongoingPress = () => setOngoing(!ongoing);
 
+  useEffect(() => {
+    if (weekdays === '1111111') setEveryDay(true);
+  }, [weekdays]);
+
   const onSubmit = () => {
-    if (anyDay ? timesPerWeek ===  0 : weekdays === '0000000') {
+    if (weekdays === '0000000') {
       Alert.alert(
         "Goal Incomplete",
         "Aim for at least once per week",
@@ -52,7 +54,7 @@ export default function CreateGoal() {
         timesPerWeek,
         weekdays,
         shared,
-        anyDay,
+        everyDay,
       };
       saveGoal(goalToSave).then((newGoal) => {
         setCurrentGoal(newGoal);
@@ -72,36 +74,19 @@ export default function CreateGoal() {
             <View style={styles.formRowSeparator}></View>
 
 
-            <View style={styles.formRow}>
-              <TouchableHighlight style={{width: '31.3333%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={everyDayPress}>
-                <View style={timesPerWeek === 7 ? styles.buttonSelected : styles.buttonNotSelected}>
-                  <Text style={timesPerWeek === 7 ? styles.buttonTextSelected : styles.buttonTextNotSelected }>Every Day</Text>
-                </View>
-              </TouchableHighlight>
-              <View style={{width: '2%'}}></View>
-              <TouchableHighlight style={{width: '31.3333%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={() => anyDayPress(true)}>
-                <View style={anyDay && timesPerWeek !== 7 ? styles.buttonSelected : styles.buttonNotSelected}>
-                  <Text style={anyDay && timesPerWeek !== 7 ? styles.buttonTextSelected : styles.buttonTextNotSelected}>Times / Wk</Text>
-                </View>
-              </TouchableHighlight>
-              <View style={{width: '2%'}}></View>
-              <TouchableHighlight style={{width: '31.3333%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={() => anyDayPress(false)}>
-                <View style={!anyDay && timesPerWeek !== 7 ? styles.buttonSelected : styles.buttonNotSelected}>
-                  <Text style={!anyDay && timesPerWeek !== 7 ? styles.buttonTextSelected : styles.buttonTextNotSelected}>Select Days</Text>
-                </View>
-              </TouchableHighlight>
-            </View>
-            <View style={{height: 15}}></View>
-
-            {anyDay ?
+            { everyDay ?
               <View style={styles.formRow}>
-                {['1','2','3','4','5','6','7'].map(x =>
-                  <TouchableHighlight key={`tpw-${x}`} style={{width: '12.5%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={_ => timesPerWeekPress(parseInt(x))}>
-                    <View style={x === timesPerWeek.toString() ? styles.buttonSelected : styles.buttonNotSelected}>
-                      <Text style={x === timesPerWeek.toString() ? styles.buttonTextSelected : styles.buttonTextNotSelected}>{x}</Text>
-                    </View>
-                  </TouchableHighlight>
-                )}
+                <TouchableHighlight style={{width: '49%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={() => everyDayPress(true)}>
+                  <View style={everyDay ? styles.buttonSelected : styles.buttonNotSelected}>
+                    <Text style={everyDay ? styles.buttonTextSelected : styles.buttonTextNotSelected }>Every Day</Text>
+                  </View>
+                </TouchableHighlight>
+                <View style={{width: '2%'}}></View>
+                <TouchableHighlight style={{width: '49%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={() => everyDayPress(false)}>
+                  <View style={!everyDay ? styles.buttonSelected : styles.buttonNotSelected}>
+                    <Text style={!everyDay ? styles.buttonTextSelected : styles.buttonTextNotSelected}>Select Days</Text>
+                  </View>
+                </TouchableHighlight>
               </View>
             :
               <View style={styles.formRow}>
@@ -115,7 +100,6 @@ export default function CreateGoal() {
               </View>
             }
             <View style={styles.formRowSeparator}></View>
-
 
             {/* <View style={styles.formRow}>
               <TouchableHighlight style={{width: ongoing ? '100%' : '31%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={ongoingPress}>

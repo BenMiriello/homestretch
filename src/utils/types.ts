@@ -3,5 +3,5 @@ export interface GoalType {
   timesPerWeek: number;
   weekdays: string;
   shared: boolean;
-  anyDay: boolean;
+  everyDay: boolean;
 };
