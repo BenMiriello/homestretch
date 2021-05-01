@@ -12,15 +12,15 @@ export default function CreateGoal() {
   const { goalName, setGoalName, saveGoal, setCurrentGoal } = useAppState();
 
   const [timesPerWeek, setTimesPerWeek] = useState<number>(7);
-  const [everyDay, setEveryDay] = useState<boolean>(true);
+  const [daily, setDaily] = useState<boolean>(true);
   const [weekdays, setWeekdays] = useState<string>('1111111');
   const [shared, setShared] = useState<boolean>(false);
   // const [endDate, setEndDate] = useState<Date | null>(null);
   // const [ongoing, setOngoing] = useState<boolean>(true);
 
   const sharedPress = () => setShared(!shared);
-  const everyDayPress = (b: boolean) => {
-    setEveryDay(b);
+  const dailyPress = (b: boolean) => {
+    setDaily(b);
     setWeekdays('1111110');
   };
   const weekDaysPress = (idx: number) => {
@@ -32,7 +32,7 @@ export default function CreateGoal() {
   // const ongoingPress = () => setOngoing(!ongoing);
 
   useEffect(() => {
-    if (weekdays === '1111111') setEveryDay(true);
+    if (weekdays === '1111111') setDaily(true);
   }, [weekdays]);
 
   const onSubmit = () => {
@@ -54,7 +54,7 @@ export default function CreateGoal() {
         timesPerWeek,
         weekdays,
         shared,
-        everyDay,
+        daily,
       };
       saveGoal(goalToSave).then((newGoal) => {
         setCurrentGoal(newGoal);
@@ -74,17 +74,17 @@ export default function CreateGoal() {
             <View style={styles.formRowSeparator}></View>
 
 
-            { everyDay ?
+            { daily ?
               <View style={styles.formRow}>
-                <TouchableHighlight style={{width: '49%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={() => everyDayPress(true)}>
-                  <View style={everyDay ? styles.buttonSelected : styles.buttonNotSelected}>
-                    <Text style={everyDay ? styles.buttonTextSelected : styles.buttonTextNotSelected }>Every Day</Text>
+                <TouchableHighlight style={{width: '49%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={() => dailyPress(true)}>
+                  <View style={daily ? styles.buttonSelected : styles.buttonNotSelected}>
+                    <Text style={daily ? styles.buttonTextSelected : styles.buttonTextNotSelected }>Daily</Text>
                   </View>
                 </TouchableHighlight>
                 <View style={{width: '2%'}}></View>
-                <TouchableHighlight style={{width: '49%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={() => everyDayPress(false)}>
-                  <View style={!everyDay ? styles.buttonSelected : styles.buttonNotSelected}>
-                    <Text style={!everyDay ? styles.buttonTextSelected : styles.buttonTextNotSelected}>Select Days</Text>
+                <TouchableHighlight style={{width: '49%'}} activeOpacity={0.6} underlayColor='#DDDDDD' onPress={() => dailyPress(false)}>
+                  <View style={!daily ? styles.buttonSelected : styles.buttonNotSelected}>
+                    <Text style={!daily ? styles.buttonTextSelected : styles.buttonTextNotSelected}>Select Days</Text>
                   </View>
                 </TouchableHighlight>
               </View>

@@ -18,12 +18,16 @@ export default function GoalDetails() {
       <View style={styles.container}>
         <View>
           <Text style={styles.textRow}>{currentGoal.name}</Text>
-          {currentGoal.anyDay ?
+          {currentGoal.daily ?
             <Text style={styles.textRow}>
-              {currentGoal.timesPerWeek.toString()} day{currentGoal.timesPerWeek === 1 ? '' : 's'}/week
-            </Text> 
-          : null}
-          {currentGoal.anyDay ? null :
+              Daily {/* {currentGoal.timesPerWeek.toString()} day{currentGoal.timesPerWeek === 1 ? '' : 's'}/week */}
+            </Text>
+          :
+            null
+          }
+          {currentGoal.daily ?
+            null
+          :
             <Text style={styles.textRow}>{displayWeekdays}</Text>
           }
           <Text style={styles.textRow}>{currentGoal.shared ? 'Public' : 'Private'}</Text>
