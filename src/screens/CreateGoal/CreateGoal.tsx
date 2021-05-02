@@ -49,17 +49,19 @@ export default function CreateGoal() {
         [{ text: "OK" }],
       )
     } else {
-      const goalToSave: GoalType = {
-        name: goalName,
-        timesPerWeek,
-        weekdays,
-        shared,
-        daily,
-      };
-      saveGoal(goalToSave).then((newGoal) => {
-        setCurrentGoal(newGoal);
-        navigation.navigate('Goal Details');
-      });
+      const goalToSave: GoalType = { name: goalName, timesPerWeek, weekdays, shared, daily };
+      saveGoal(goalToSave)
+        .then((newGoal) => {
+          setCurrentGoal(newGoal);
+          navigation.navigate('Goal Details');
+        })
+        .catch((err: {header: string, message: string}) => {
+          Alert.alert(
+            err.header,
+            err.message,
+            [{text: 'OK'}]
+          )
+        })
     }
   };
 

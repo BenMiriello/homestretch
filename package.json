@@ -37,6 +37,9 @@
     "jest-expo": "~41.0.0",
     "typescript": "~4.0.0"
   },
+  "engines": {
+    
+  },
   "jest": {
     "preset": "react-native"
   },

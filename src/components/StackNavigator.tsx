@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Suggestions from "../screens/Suggestions/Suggestions";
 import CreateGoal from "../screens/CreateGoal/CreateGoal";
 import GoalDetails from "../screens/GoalDetails/GoalDetails";
+import GoalsIndex from "../screens/GoalsIndex/GoalsIndex";
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ const MainStackNavigator = () => {
       <Stack.Screen name="Suggestions" component={Suggestions} />
       <Stack.Screen name="Create Goal" component={CreateGoal} />
       <Stack.Screen name="Goal Details" component={GoalDetails} />
+      <Stack.Screen name="My Goals" component={GoalsIndex} />
     </Stack.Navigator>
   );
 }

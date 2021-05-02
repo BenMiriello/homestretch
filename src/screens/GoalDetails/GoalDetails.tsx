@@ -1,14 +1,16 @@
 import React from 'react'
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import useAppState from '../../state';
 import { weekDayNames } from '../../utils/constants';
 
 export default function GoalDetails() {
+  const navigation = useNavigation();
   const { currentGoal } = useAppState();
 
   const displayWeekdays = (
-    currentGoal.weekdays.split('').map((n, i) => (
+    currentGoal && currentGoal.weekdays.split('').map((n, i) => (
       n === '1' ? weekDayNames[i] : null
     )).filter(e => e).join(', ')
   );
@@ -17,10 +19,14 @@ export default function GoalDetails() {
     <SafeAreaView>
       <View style={styles.container}>
         <View>
+          <Button
+            title="Go to My Goals"
+            onPress={() => navigation.navigate('My Goals')}
+          />
           <Text style={styles.textRow}>{currentGoal.name}</Text>
           {currentGoal.daily ?
             <Text style={styles.textRow}>
-              Daily {/* {currentGoal.timesPerWeek.toString()} day{currentGoal.timesPerWeek === 1 ? '' : 's'}/week */}
+              Daily
             </Text>
           :
             null

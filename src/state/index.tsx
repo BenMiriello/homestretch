@@ -1,6 +1,10 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
+import useAsyncStorage from '../hooks/asyncStorage';
 import { GoalType } from '../utils/types';
+import useFetching from '../hooks/useFetching';
+
+import AsyncStorage from "@react-native-community/async-storage";
 
 export interface StateContextType {
   goalName: string;
@@ -13,11 +17,15 @@ export interface StateContextType {
 export const StateContext = createContext<StateContextType>(null!);
 
 export const AppStateProvider = (props: React.PropsWithChildren<{}>) => {
+  const { setNewStoredGoal } = useAsyncStorage();
   const [goalName, setGoalName] = useState('');
   const [currentGoal, setCurrentGoal] = useState<GoalType | null>();
+  const [fetching, setFetching] = useFetching();
 
   const saveGoal = (newGoal: GoalType) => {
-    setGoalName('');
+    setFetching(true);
+    setNewStoredGoal(newGoal);
+    setFetching(false);
     return new Promise((resolve) => setTimeout(() => resolve(newGoal), 500));
   };
 
